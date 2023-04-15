@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:id="@+id/main_container"
     tools:layout="@layout/fragment_main"
-    android:name="com.example.cardfate.MainFragment"
+    android:name="com.example.cardfate.presentation.fragment.MainFragment"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/>
+    tools:context=".presentation.activity.MainActivity"/>
 
