@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_right"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.9" />
 
     <TextView
         android:id="@+id/tv_app_name"
@@ -37,11 +37,10 @@
         android:id="@+id/et_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:autofillHints="phone"
         android:background="@drawable/auth_bg_authorize_field"
         android:layout_marginTop="20dp"
         android:hint="Логин"
-        android:inputType="phone"
+        android:inputType="text"
         android:paddingHorizontal="32dp"
         android:paddingVertical="14dp"
         android:textColor="@color/common_google_signin_btn_text_light"

@@ -28,7 +28,13 @@ class LogInViewModel @Inject constructor(
             viewModelScope.launch {
                 try {
                     logInUseCase.invoke(login, password) {
-                        _authState.value = AuthSuccess
+                        if (it != null)
+                            if (it.password==password)
+                                _authState.value = AuthSuccess(it.login)
+                            else
+                                _authState.value = AuthError(ERROR_WRONG_PASSWORD)
+                        else
+                            _authState.value = AuthError(ERROR_USER_DOES_NOT_EXISTS)
                     }
                 } catch (e: UserDoesNotExistsException) {
                     _authState.value = AuthError(ERROR_USER_DOES_NOT_EXISTS)

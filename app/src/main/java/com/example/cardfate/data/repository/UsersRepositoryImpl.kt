@@ -1,12 +1,11 @@
 package com.example.cardfate.data.repository
 
 import com.example.cardfate.domain.entity.User
-import com.example.cardfate.domain.exceptions.CheckInternetException
-import com.example.cardfate.domain.exceptions.UserAlreadyExistsException
-import com.example.cardfate.domain.exceptions.UserNotFoundException
+import com.example.cardfate.domain.exceptions.*
 import com.example.cardfate.domain.repository.UsersRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.ktx.toObject
 import javax.inject.Inject
 
 class UsersRepositoryImpl @Inject constructor(
@@ -29,14 +28,15 @@ class UsersRepositoryImpl @Inject constructor(
             }
     }
 
-    override suspend fun logIn(login: String, password: String, callback: (String) -> Unit) {
+    override suspend fun logIn(login: String, password: String, callback: (User?) -> Unit) {
         db.collection(USERS).document(login)
             .get()
             .addOnSuccessListener {
                 if (it != null) {
-                    callback.invoke((it.data as User).login)
+                    val user = it.toObject<User>()
+                    callback.invoke(user)
                 } else {
-                    throw UserNotFoundException()
+                    throw UserDoesNotExistsException()
                 }
             }
             .addOnFailureListener {

@@ -12,6 +12,7 @@ import androidx.preference.PreferenceManager
 import com.example.cardfate.CardFateApp
 import com.example.cardfate.R
 import com.example.cardfate.databinding.FragmentLogInBinding
+import com.example.cardfate.presentation.activity.MainActivity
 import com.example.cardfate.presentation.state.AuthError
 import com.example.cardfate.presentation.state.AuthProgress
 import com.example.cardfate.presentation.state.AuthSuccess
@@ -83,7 +84,7 @@ class LogInFragment : Fragment() {
             when (it) {
                 is AuthSuccess -> {
                     navigateToFragment(MainFragment())
-                    updateSharedPreferences()
+                    updateSharedPreferences(it.login)
                 }
                 is AuthProgress -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -96,9 +97,9 @@ class LogInFragment : Fragment() {
         }
     }
 
-    private fun updateSharedPreferences() {
+    private fun updateSharedPreferences(login: String) {
         val pref = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        pref.edit().putBoolean(IS_LOGGED, true).apply()
+        pref.edit().putString(MainActivity.LOGIN, login).apply()
     }
 
     private fun showError(errorCode: Int) {

@@ -29,7 +29,7 @@ class SignInViewModel @Inject constructor(
             viewModelScope.launch {
                 try {
                     signInUseCase.invoke(login,password) {
-                        _authState.value = AuthSuccess
+                        _authState.value = AuthSuccess(it)
                     }
                 } catch (e: UserAlreadyExistsException) {
                     _authState.value = AuthError(ERROR_SUCH_USER_EXISTS)

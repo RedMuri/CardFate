@@ -1,6 +1,6 @@
-package com.example.cardfate.domain.entity
+package com.example.cardfate.data.model
 
-data class User(
+data class UserDto(
     val id: Int? = null,
     val photoUrl: String? = null,
     val login: String = "",
@@ -12,4 +12,3 @@ data class User(
     val idCard: Int? = null,
     val idSkill: Int? = null,
 )
-
