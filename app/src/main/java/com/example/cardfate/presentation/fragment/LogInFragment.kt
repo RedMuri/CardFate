@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.example.auth.*
-import com.example.auth.databinding.FragmentLogInBinding
 import com.example.auth.di.AuthComponentProvider
 import com.example.auth.viewmodel.AuthViewModelFactory
+import com.example.cardfate.databinding.FragmentLogInBinding
 import com.example.cardfate.presentation.viewmodel.LogInViewModel
 import javax.inject.Inject
 
@@ -70,7 +70,7 @@ class LogInFragment : Fragment() {
             val password = binding.etPassword.text.toString().trim()
             logInViewModel.logIn(firstName, password)
         }
-        binding.btSignIn.setOnClickListener{
+        binding.btSignIn.setOnClickListener {
             navigator.navigateFromLogInToSignInPage()
         }
     }

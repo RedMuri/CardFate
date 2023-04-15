@@ -10,4 +10,5 @@
 
     <color name="ripple_color_light">#80FFFFFF</color>
     <color name="ripple_color_dark">#804E4C4C</color>
+    <color name="grey">#918F8F</color>
 </resources>
