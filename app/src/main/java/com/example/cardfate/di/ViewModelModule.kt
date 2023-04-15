@@ -1,23 +1,23 @@
 package com.example.cardfate.di
 
+import androidx.lifecycle.ViewModel
 import com.example.cardfate.presentation.viewmodel.LogInViewModel
 import com.example.cardfate.presentation.viewmodel.SignInViewModel
-import com.example.cardfate.domain.usecases.auth.LogInUseCase
-import com.example.cardfate.domain.usecases.auth.SignInUseCase
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.multibindings.IntoMap
 
 @Module
-object ViewModelModule {
+interface ViewModelModule {
 
 
-    @Provides
-    fun provideSignInViewModel(signInUseCase: SignInUseCase): SignInViewModel {
-        return SignInViewModel(signInUseCase)
-    }
+    @IntoMap
+    @ViewModelKey(SignInViewModel::class)
+    @Binds
+    fun bindSignInViewModel(viewModel: SignInViewModel): ViewModel
 
-    @Provides
-    fun provideLogInViewModel(logInUseCase: LogInUseCase): LogInViewModel {
-        return LogInViewModel(logInUseCase)
-    }
+    @IntoMap
+    @ViewModelKey(LogInViewModel::class)
+    @Binds
+    fun bindLogInViewModel(viewModel: LogInViewModel): ViewModel
 }

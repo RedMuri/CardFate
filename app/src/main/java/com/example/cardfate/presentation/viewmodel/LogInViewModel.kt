@@ -21,13 +21,13 @@ class LogInViewModel @Inject constructor(
     private var _authState = MutableLiveData<AuthState>()
     val authState: LiveData<AuthState> = _authState
 
-    fun logIn(phone: String, password: String) {
-        val fieldsValid = validateInputLogIn(phone, password)
+    fun logIn(login: String, password: String) {
+        val fieldsValid = validateInputLogIn(login, password)
         if (fieldsValid) {
             _authState.value = AuthProgress
             viewModelScope.launch {
                 try {
-                    logInUseCase.invoke(phone, password) {
+                    logInUseCase.invoke(login, password) {
                         _authState.value = AuthSuccess
                     }
                 } catch (e: UserDoesNotExistsException) {
@@ -39,8 +39,8 @@ class LogInViewModel @Inject constructor(
         }
     }
 
-    private fun validateInputLogIn(phone: String, password: String): Boolean {
-        if (phone.isBlank()) {
+    private fun validateInputLogIn(login: String, password: String): Boolean {
+        if (login.isBlank()) {
             _authState.value = AuthError(ERROR_EMPTY_LOGIN)
             return false
         }

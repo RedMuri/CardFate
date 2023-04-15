@@ -28,7 +28,7 @@ class SignInViewModel @Inject constructor(
             val user = User(login = login, password = password)
             viewModelScope.launch {
                 try {
-                    signInUseCase.invoke(user) {
+                    signInUseCase.invoke(login,password) {
                         _authState.value = AuthSuccess
                     }
                 } catch (e: UserAlreadyExistsException) {

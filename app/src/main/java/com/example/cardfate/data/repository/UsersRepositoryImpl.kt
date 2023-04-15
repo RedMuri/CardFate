@@ -30,7 +30,7 @@ class UsersRepositoryImpl @Inject constructor(
     }
 
     override suspend fun logIn(login: String, password: String, callback: (String) -> Unit) {
-        val user = db.collection(USERS).document(login)
+        db.collection(USERS).document(login)
             .get()
             .addOnSuccessListener {
                 if (it != null) {
