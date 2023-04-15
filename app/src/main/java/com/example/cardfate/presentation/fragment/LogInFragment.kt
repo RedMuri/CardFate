@@ -103,7 +103,7 @@ class LogInFragment : Fragment() {
 
     private fun showError(errorCode: Int) {
         when (errorCode) {
-            LogInViewModel.ERROR_EMPTY_PHONE -> {
+            LogInViewModel.ERROR_EMPTY_LOGIN -> {
                 showErrorToast("Все поля должны быть заполнены")
             }
             LogInViewModel.ERROR_EMPTY_PASSWORD -> {
