@@ -5,17 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
-import com.example.auth.*
-import com.example.auth.di.AuthComponentProvider
+import com.example.cardfate.CardFateApp
+import com.example.cardfate.R
 import com.example.cardfate.databinding.FragmentLogInBinding
+import com.example.cardfate.presentation.state.AuthError
+import com.example.cardfate.presentation.state.AuthProgress
+import com.example.cardfate.presentation.state.AuthSuccess
 import com.example.cardfate.presentation.viewmodel.LogInViewModel
 import com.example.cardfate.presentation.viewmodel.ViewModelFactory
 import javax.inject.Inject
@@ -37,7 +36,7 @@ class LogInFragment : Fragment() {
     }
 
     private val component by lazy {
-        (requireActivity().application as AuthComponentProvider).getAuthComponent()
+        (requireActivity().application as CardFateApp).component
     }
 
     override fun onAttach(context: Context) {
@@ -57,18 +56,23 @@ class LogInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
         bindClickListeners()
-        addTextChangeListeners()
     }
 
     private fun bindClickListeners() {
         binding.btLogIn.setOnClickListener {
-            val firstName = binding.etPhone.text.toString().trim()
+            val login = binding.etLogin.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
-            logInViewModel.logIn(firstName, password)
+            logInViewModel.logIn(login, password)
         }
         binding.btSignIn.setOnClickListener {
-            navigator.navigateFromLogInToSignInPage()
+            navigateToFragment(SignInFragment())
         }
+    }
+
+    private fun navigateToFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .commit()
     }
 
     private fun observeViewModel() {
@@ -78,7 +82,7 @@ class LogInFragment : Fragment() {
 
             when (it) {
                 is AuthSuccess -> {
-                    navigator.navigateFromLogInToMainPage()
+                    navigateToFragment(MainFragment())
                     updateSharedPreferences()
                 }
                 is AuthProgress -> {
@@ -100,83 +104,16 @@ class LogInFragment : Fragment() {
     private fun showError(errorCode: Int) {
         when (errorCode) {
             LogInViewModel.ERROR_EMPTY_PHONE -> {
-                showErrorEditText(binding.etPhone)
                 showErrorToast("Все поля должны быть заполнены")
             }
             LogInViewModel.ERROR_EMPTY_PASSWORD -> {
-                showErrorEditText(binding.etPassword)
                 showErrorToast("Все поля должны быть заполнены")
             }
             LogInViewModel.ERROR_USER_DOES_NOT_EXISTS -> {
-                showErrorEditText(binding.etPhone)
-                showErrorToast("Пользователь с таким номером не существует")
+                showErrorToast("Пользователь с таким логином не существует")
             }
             LogInViewModel.ERROR_WRONG_PASSWORD -> {
-                showErrorEditText(binding.etPassword)
                 showErrorToast("Неверный пароль")
-            }
-        }
-    }
-
-
-    private fun addTextChangeListeners() {
-        binding.etPhone.doOnTextChanged { _, _, _, _ ->
-            hideErrorEditText(binding.etPhone)
-        }
-        binding.etPassword.doOnTextChanged { _, _, _, _ ->
-            hideErrorEditText(binding.etPassword)
-        }
-    }
-
-    private fun hideErrorEditText(editText: EditText) {
-        with(editText) {
-            if (background != AppCompatResources.getDrawable(
-                    requireContext(),
-                    R.drawable.bg_authorize_field_error
-                )
-            ) {
-                background =
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.bg_authorize_field)
-                setHintTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.gray
-                    )
-                )
-                setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.gray
-                    )
-                )
-            }
-        }
-    }
-
-    private fun showErrorEditText(editText: EditText) {
-        with(editText) {
-            if (background != AppCompatResources.getDrawable(
-                    requireContext(),
-                    R.drawable.bg_authorize_field_error
-                )
-            ) {
-                background =
-                    AppCompatResources.getDrawable(
-                        requireContext(),
-                        R.drawable.bg_authorize_field_error
-                    )
-                setHintTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.red
-                    )
-                )
-                setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.red
-                    )
-                )
             }
         }
     }
