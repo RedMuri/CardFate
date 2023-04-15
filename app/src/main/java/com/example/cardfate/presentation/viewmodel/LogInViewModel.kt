@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cardfate.domain.usecases.auth.LogInUseCase
+import com.example.cardfate.domain.usecases.LogInUseCase
 import com.example.cardfate.presentation.state.AuthError
 import com.example.cardfate.presentation.state.AuthProgress
 import com.example.cardfate.presentation.state.AuthState

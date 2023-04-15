@@ -25,10 +25,4 @@ class CardFragment : Fragment() {
             clipToOutline = true
         }
     }
-
-    companion object {
-
-        fun newInstance() =
-            CardFragment()
-    }
 }

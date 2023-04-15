@@ -45,10 +45,27 @@
                 tools:clipToOutline="true" />
 
             <EditText
-                android:id="@+id/et_full_name"
+                android:id="@+id/et_card_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:background="@drawable/create_card_bg_field"
+                android:hint="Название визитки"
+                android:inputType="text"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="14dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/gl_right"
+                app:layout_constraintStart_toStartOf="@+id/gl_left"
+                app:layout_constraintTop_toBottomOf="@+id/iv_user_image" />
+
+
+            <EditText
+                android:id="@+id/et_full_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
                 android:background="@drawable/create_card_bg_field"
                 android:hint="ФИО"
                 android:inputType="text"
@@ -58,7 +75,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/gl_right"
                 app:layout_constraintStart_toStartOf="@+id/gl_left"
-                app:layout_constraintTop_toBottomOf="@+id/iv_user_image" />
+                app:layout_constraintTop_toBottomOf="@+id/et_card_name" />
 
 
             <EditText
@@ -186,6 +203,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:paddingVertical="14dp"
                 android:text="Создать визитику"
@@ -196,6 +214,25 @@
                 app:layout_constraintEnd_toStartOf="@+id/gl_right"
                 app:layout_constraintStart_toStartOf="@+id/gl_left"
                 app:layout_constraintTop_toBottomOf="@id/et_mail" />
+
+            <LinearLayout
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:clickable="true"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

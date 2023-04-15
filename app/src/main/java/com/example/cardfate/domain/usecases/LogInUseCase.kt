@@ -1,4 +1,4 @@
-package com.example.cardfate.domain.usecases.auth
+package com.example.cardfate.domain.usecases
 
 import com.example.cardfate.domain.entity.User
 import com.example.cardfate.domain.repository.UsersRepository
