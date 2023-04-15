@@ -2,8 +2,8 @@ package com.example.cardfate.di
 
 import com.example.cardfate.presentation.viewmodel.LogInViewModel
 import com.example.cardfate.presentation.viewmodel.SignInViewModel
-import com.example.domain.use_cases.LogInUseCase
-import com.example.domain.use_cases.SignInUseCase
+import com.example.cardfate.domain.usecases.auth.LogInUseCase
+import com.example.cardfate.domain.usecases.auth.SignInUseCase
 import dagger.Module
 import dagger.Provides
 

@@ -15,9 +15,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.example.auth.*
 import com.example.auth.di.AuthComponentProvider
-import com.example.auth.viewmodel.AuthViewModelFactory
 import com.example.cardfate.databinding.FragmentLogInBinding
 import com.example.cardfate.presentation.viewmodel.LogInViewModel
+import com.example.cardfate.presentation.viewmodel.ViewModelFactory
 import javax.inject.Inject
 
 
@@ -30,14 +30,10 @@ class LogInFragment : Fragment() {
     private var errorToast: Toast? = null
 
     @Inject
-    lateinit var authViewModelFactory: AuthViewModelFactory
+    lateinit var viewModelFactory: ViewModelFactory
 
     private val logInViewModel by lazy {
-        ViewModelProvider(this, authViewModelFactory)[LogInViewModel::class.java]
-    }
-
-    private val navigator by lazy {
-        (requireActivity() as AuthNavigation)
+        ViewModelProvider(this, viewModelFactory)[LogInViewModel::class.java]
     }
 
     private val component by lazy {
