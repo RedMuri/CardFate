@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.auth.AuthError
-import com.example.auth.AuthProgress
-import com.example.auth.AuthState
-import com.example.auth.AuthSuccess
-import com.example.data.exceptions.UserDoesNotExistsException
-import com.example.data.exceptions.WrongPasswordLogInException
-import com.example.domain.use_cases.LogInUseCase
+import com.example.cardfate.domain.usecases.auth.LogInUseCase
+import com.example.cardfate.presentation.state.AuthError
+import com.example.cardfate.presentation.state.AuthProgress
+import com.example.cardfate.presentation.state.AuthState
+import com.example.cardfate.presentation.state.AuthSuccess
+import com.example.cardfate.domain.exceptions.UserDoesNotExistsException
+import com.example.cardfate.domain.exceptions.WrongPasswordLogInException
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -41,7 +41,7 @@ class LogInViewModel @Inject constructor(
 
     private fun validateInputLogIn(phone: String, password: String): Boolean {
         if (phone.isBlank()) {
-            _authState.value = AuthError(ERROR_EMPTY_PHONE)
+            _authState.value = AuthError(ERROR_EMPTY_LOGIN)
             return false
         }
         if (password.isBlank()) {
@@ -53,7 +53,7 @@ class LogInViewModel @Inject constructor(
 
     companion object {
 
-        const val ERROR_EMPTY_PHONE = 1
+        const val ERROR_EMPTY_LOGIN = 1
         const val ERROR_EMPTY_PASSWORD = 2
         const val ERROR_USER_DOES_NOT_EXISTS = 3
         const val ERROR_WRONG_PASSWORD = 4

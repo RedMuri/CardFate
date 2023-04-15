@@ -1,12 +1,9 @@
 package com.example.cardfate.domain.usecases.auth
 
-import com.example.cardfate.domain.repository.AuthRepository
+import com.example.cardfate.domain.repository.UsersRepository
 import javax.inject.Inject
 
-class LogInUseCase @Inject constructor(
-    private val repository: AuthRepository
-) {
-
-    operator fun invoke(email: String, password: String) =
-        repository.logIn(email,password)
+class LogInUseCase @Inject constructor(private val usersRepository: UsersRepository) {
+    suspend operator fun invoke(name: String, password: String, callback: () -> Unit) =
+        usersRepository.logIn(name, password, callback)
 }
