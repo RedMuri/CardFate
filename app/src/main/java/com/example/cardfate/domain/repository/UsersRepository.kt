@@ -1,6 +1,6 @@
 package com.example.cardfate.domain.repository
 
-import com.example.homehelper.domain.entities.User
+import com.example.cardfate.domain.entity.User
 
 interface UsersRepository {
 

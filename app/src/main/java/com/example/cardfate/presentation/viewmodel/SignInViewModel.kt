@@ -10,7 +10,7 @@ import com.example.cardfate.presentation.state.AuthProgress
 import com.example.cardfate.presentation.state.AuthState
 import com.example.cardfate.presentation.state.AuthSuccess
 import com.example.cardfate.domain.exceptions.UserAlreadyExistsException
-import com.example.homehelper.domain.entities.User
+import com.example.cardfate.domain.entity.User
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,7 +25,7 @@ class SignInViewModel @Inject constructor(
         val fieldsValid = validateInputSignIn(login, password)
         if (fieldsValid) {
             _authState.value = AuthProgress
-            val user = User(login, password)
+            val user = User(login = login, password = password)
             viewModelScope.launch {
                 try {
                     signInUseCase.invoke(user) {
