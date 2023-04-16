@@ -2,10 +2,7 @@ package com.example.cardfate.di
 
 import android.app.Application
 import com.example.cardfate.presentation.activity.MainActivity
-import com.example.cardfate.presentation.fragment.CreateCardFragment
-import com.example.cardfate.presentation.fragment.LogInFragment
-import com.example.cardfate.presentation.fragment.MainFragment
-import com.example.cardfate.presentation.fragment.SignInFragment
+import com.example.cardfate.presentation.fragment.*
 import dagger.BindsInstance
 import dagger.Component
 
@@ -16,6 +13,7 @@ interface ApplicationComponent {
     fun inject(logInFragment: LogInFragment)
     fun inject(createCardFragment: CreateCardFragment)
     fun inject(mainFragment: MainFragment)
+    fun inject(cardFragment: CardFragment)
     fun inject(mainActivity: MainActivity)
 
     @Component.Factory

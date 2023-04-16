@@ -68,10 +68,25 @@ class CardRepositoryImpl @Inject constructor(
                             .map { it.toObject<Card>()!! }
                             .filter { it.userId == userId }
                         callback.invoke(cardsDto)
-                    } catch (_: Exception) {}
+                    } catch (_: Exception) {
+                    }
                 } else {
                     throw CheckInternetException()
                 }
+            }
+    }
+
+    override suspend fun getCardById(cardId: String, callback: (Card) -> Unit) {
+        db.collection(CARDS).document(cardId)
+            .get()
+            .addOnSuccessListener {
+                if (it != null) {
+                    val cardDto = it.toObject<Card>()
+                    callback.invoke(cardDto!!)
+                }
+            }
+            .addOnFailureListener {
+                throw CheckInternetException()
             }
     }
 

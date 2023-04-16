@@ -7,4 +7,6 @@ interface CardRepository {
     suspend fun uploadCard(card: Card, callback: () -> Unit)
 
     suspend fun getCardsByUserId(userId: String, callback: (List<Card>) -> Unit)
+
+    suspend fun getCardById(cardId: String, callback: (Card) -> Unit)
 }
