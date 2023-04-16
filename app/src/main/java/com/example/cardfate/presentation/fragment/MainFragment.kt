@@ -68,13 +68,17 @@ class MainFragment : Fragment() {
 
     private fun observeViewModel() {
         mainViewModel.cards.observe(viewLifecycleOwner) {
+            binding.vpCards.visibility = View.VISIBLE
             vpAdapterItemImages.cards = it
             rvAdapterItemImages.images = it.map { it.imageUrl }
         }
     }
 
     private fun loadCards() {
-        mainViewModel.getCardsByUserId(getUserId()!!)
+        val id = getUserId()
+        id?.let {
+            mainViewModel.getCardsByUserId(it)
+        }
     }
 
     private fun getUserId(): String? {
@@ -83,7 +87,7 @@ class MainFragment : Fragment() {
     }
 
     private fun bindClickListeners() {
-        vpAdapterItemImages.onItemClickListener =  {
+        vpAdapterItemImages.onItemClickListener = {
             navigateToFragment(CardFragment.newInstance(it.id!!))
         }
         binding.btCreateCart.setOnClickListener {

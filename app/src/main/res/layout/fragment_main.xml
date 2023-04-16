@@ -13,6 +13,7 @@
         android:layout_margin="16dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
+        android:visibility="gone"
         android:orientation="horizontal"
         app:layout_constraintDimensionRatio="4:3"
         app:layout_constraintEnd_toEndOf="parent"
