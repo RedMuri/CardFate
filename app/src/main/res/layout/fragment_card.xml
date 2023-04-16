@@ -7,8 +7,10 @@
     tools:context=".presentation.fragment.CardFragment">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -52,7 +54,7 @@
                 android:id="@+id/tv_full_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:text="Elena Olga"
                 android:textColor="@color/black"
                 android:textSize="28sp"
@@ -67,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="UX/UI Designer"
+                android:textAllCaps="true"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +81,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="14dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="14dp"
                 android:src="@drawable/card_img_link_vk"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/tv_link_tg"
@@ -91,7 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="14dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="14dp"
                 android:src="@drawable/card_img_link_tg"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/tv_link_wp"
@@ -103,7 +106,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="14dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="14dp"
                 android:src="@drawable/card_img_link_wp"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/tv_link_vb"
@@ -128,7 +131,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="14dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="14dp"
                 android:src="@drawable/card_img_link_phone"
                 app:layout_constraintDimensionRatio="2:1"
                 app:layout_constraintEnd_toStartOf="@id/tv_link_mail"
@@ -271,4 +274,96 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1A3C2F2F"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="14dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/bt_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_gravity="start"
+            android:adjustViewBounds="true"
+            android:src="@drawable/card_img_bt_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/bt_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/card_img_bt_favorite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/bt_qr"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/bt_qr"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_gravity="end"
+            android:adjustViewBounds="true"
+            android:src="@drawable/card_img_bt_qr"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_qr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ripple_color_dark"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="@drawable/card_qr_bg"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_qr"
+                android:src="@drawable/card_img_bt_qr"
+                android:layout_width="250dp"
+                android:layout_height="250dp"/>
+
+            <TextView
+                android:id="@+id/bt_close_qr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginVertical="8dp"
+                android:background="@drawable/card_bg_close_bt"
+                android:paddingVertical="10dp"
+                android:textColor="@color/white"
+                android:paddingHorizontal="20dp"
+                android:text="Закрыть"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

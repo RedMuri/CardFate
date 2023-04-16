@@ -1,6 +1,8 @@
 package com.example.cardfate.presentation.fragment
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +15,11 @@ import com.example.cardfate.R
 import com.example.cardfate.databinding.FragmentCardBinding
 import com.example.cardfate.presentation.viewmodel.CardViewModel
 import com.example.cardfate.presentation.viewmodel.ViewModelFactory
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.EncodeHintType
+import com.google.zxing.qrcode.QRCodeWriter
 import com.squareup.picasso.Picasso
+import java.util.*
 import javax.inject.Inject
 
 
@@ -60,6 +66,16 @@ class CardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getCardById()
         observeViewModel()
+        bindClickListeners()
+    }
+
+    private fun bindClickListeners() {
+        binding.btQr.setOnClickListener {
+            generateQRCode()
+        }
+        binding.btCloseQr.setOnClickListener {
+            binding.layoutQr.visibility = View.GONE
+        }
     }
 
     private fun observeViewModel() {
@@ -75,6 +91,31 @@ class CardFragment : Fragment() {
 
     private fun getCardById() {
         cardViewModel.getCardById(cardId)
+    }
+
+    private fun generateQRCode() {
+        val writer = QRCodeWriter()
+        val hints = Hashtable<EncodeHintType, Any>()
+        hints[EncodeHintType.CHARACTER_SET] = "UTF-8"
+
+        val link = "http://www.cardfate.com/card?=$cardId"
+        // Generate QR code bitmap
+        val qrCode = writer.encode(link, BarcodeFormat.QR_CODE, 512, 512, hints)
+        val width = qrCode.width
+        val height = qrCode.height
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
+
+        // Set QR code pixels to the bitmap
+        for (x in 0 until width) {
+            for (y in 0 until height) {
+                bitmap.setPixel(x, y, if (qrCode.get(x, y)) Color.BLACK else Color.WHITE)
+            }
+        }
+
+        // Set QR code bitmap to the image view
+        binding.layoutQr.visibility = View.VISIBLE
+        binding.ivQr.setImageBitmap(bitmap)
+
     }
 
     companion object {
