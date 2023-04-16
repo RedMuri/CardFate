@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.cardfate.R
 
@@ -24,5 +25,17 @@ class CardFragment : Fragment() {
         view.findViewById<ImageView>(R.id.cardView).apply {
             clipToOutline = true
         }
+    }
+
+    companion object {
+
+        private const val CARD_ID = "card_id"
+
+        fun newInstance(cardId: String) =
+            CardFragment().apply {
+                arguments = Bundle().apply {
+                    putString(CARD_ID, cardId)
+                }
+            }
     }
 }

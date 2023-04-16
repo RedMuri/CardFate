@@ -58,6 +58,23 @@ class CardRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getCardsByUserId(userId: String, callback: (List<Card>) -> Unit) {
+        db.collection(CARDS)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    try {
+                        val cardsDto = task.result.documents
+                            .map { it.toObject<Card>()!! }
+                            .filter { it.userId == userId }
+                        callback.invoke(cardsDto)
+                    } catch (_: Exception) {}
+                } else {
+                    throw CheckInternetException()
+                }
+            }
+    }
+
     companion object {
 
         const val CARDS = "cards"

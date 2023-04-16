@@ -13,10 +13,12 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import com.example.cardfate.CardFateApp
 import com.example.cardfate.R
 import com.example.cardfate.databinding.FragmentCreateCardBinding
 import com.example.cardfate.domain.entity.Card
+import com.example.cardfate.presentation.activity.MainActivity
 import com.example.cardfate.presentation.state.*
 import com.example.cardfate.presentation.viewmodel.CreateCardViewModel
 import com.example.cardfate.presentation.viewmodel.ViewModelFactory
@@ -87,6 +89,7 @@ class CreateCardFragment : Fragment() {
                 val linkVk = etLinkVk.text.toString()
                 val linkTg = etLinkTg.text.toString()
                 val mail = etMail.text.toString()
+                val userId = getUserId()
                 val card =
                     Card(
                         cardName,
@@ -98,7 +101,8 @@ class CreateCardFragment : Fragment() {
                         skills,
                         linkVk,
                         linkTg,
-                        mail
+                        mail,
+                        userId
                     )
                 createCardViewModel.uploadCard(card)
             }
@@ -106,6 +110,11 @@ class CreateCardFragment : Fragment() {
                 storagePermissionRequest()
             }
         }
+    }
+
+    private fun getUserId(): String? {
+        val pref = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        return pref.getString(MainActivity.LOGIN, null)
     }
 
     private fun observeViewModel() {

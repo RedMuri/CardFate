@@ -11,5 +11,6 @@ data class Card(
     val linkVk: String? = null,
     val linkTg: String? = null,
     val mail: String? = null,
+    val userId: String? = null,
     val id: String? = null,
 )

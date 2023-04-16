@@ -3,6 +3,7 @@ package com.example.cardfate.di
 import androidx.lifecycle.ViewModel
 import com.example.cardfate.presentation.viewmodel.CreateCardViewModel
 import com.example.cardfate.presentation.viewmodel.LogInViewModel
+import com.example.cardfate.presentation.viewmodel.MainViewModel
 import com.example.cardfate.presentation.viewmodel.SignInViewModel
 import dagger.Binds
 import dagger.Module
@@ -26,4 +27,9 @@ interface ViewModelModule {
     @ViewModelKey(CreateCardViewModel::class)
     @Binds
     fun bindCreateCardViewModel(viewModel: CreateCardViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    @Binds
+    fun bindMainViewModel(viewModel: MainViewModel): ViewModel
 }
