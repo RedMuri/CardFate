@@ -93,6 +93,9 @@ class MainFragment : Fragment() {
         binding.btCreateCart.setOnClickListener {
             navigateToFragment(CreateCardFragment())
         }
+        binding.btMenu.setOnClickListener {
+            navigateToFragment(MenuFragment())
+        }
     }
 
     private fun setupImages() {

@@ -14,6 +14,7 @@ interface ApplicationComponent {
     fun inject(createCardFragment: CreateCardFragment)
     fun inject(mainFragment: MainFragment)
     fun inject(cardFragment: CardFragment)
+    fun inject(favoriteFragment: FavoriteFragment)
     fun inject(mainActivity: MainActivity)
 
     @Component.Factory

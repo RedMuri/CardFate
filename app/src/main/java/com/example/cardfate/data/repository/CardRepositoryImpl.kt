@@ -100,6 +100,30 @@ class CardRepositoryImpl @Inject constructor(
             }
     }
 
+    override suspend fun getFavoriteCardsByUserId(userId: String, callback: (List<Card>) -> Unit) {
+        db.collection(UsersRepositoryImpl.USERS)
+            .document(userId)
+            .collection("favorite_cards")
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    try {
+                        val cardsIds = task.result.documents.map { it.get("cardId") }
+                        val cardsDto = listOf<Card>()
+                        db.collection(CARDS).document(cardsIds[0].toString())
+                            .get()
+                            .addOnSuccessListener {
+                                if (it != null) {
+                                    val cardDto = it.toObject<Card>()
+                                    callback.invoke(listOf(cardDto!!))
+                                }
+                            }
+                    } catch (_: Exception) {
+                    }
+                }
+            }
+    }
+
     companion object {
 
         const val CARDS = "cards"

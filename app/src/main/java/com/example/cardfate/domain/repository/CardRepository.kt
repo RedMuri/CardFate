@@ -12,5 +12,5 @@ interface CardRepository {
 
     suspend fun addCartToFavorite(userId: String, cardId: String, callback: () -> Unit)
 
-    //suspend fun getAllFavoriteCards(userId: String, callback: (List<Card>) -> Unit)
+    suspend fun getFavoriteCardsByUserId(userId: String, callback: (List<Card>) -> Unit)
 }

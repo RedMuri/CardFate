@@ -34,4 +34,9 @@ interface ViewModelModule {
     @ViewModelKey(CardViewModel::class)
     @Binds
     fun bindCardViewModel(viewModel: CardViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(FavoriteViewModel::class)
+    @Binds
+    fun bindFavoriteViewModel(viewModel: FavoriteViewModel): ViewModel
 }
