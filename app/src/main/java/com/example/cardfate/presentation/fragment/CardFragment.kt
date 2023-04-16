@@ -8,11 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import com.example.cardfate.CardFateApp
 import com.example.cardfate.R
 import com.example.cardfate.databinding.FragmentCardBinding
+import com.example.cardfate.domain.entity.Card
+import com.example.cardfate.presentation.activity.MainActivity
 import com.example.cardfate.presentation.viewmodel.CardViewModel
 import com.example.cardfate.presentation.viewmodel.ViewModelFactory
 import com.google.zxing.BarcodeFormat
@@ -76,6 +80,14 @@ class CardFragment : Fragment() {
         binding.btCloseQr.setOnClickListener {
             binding.layoutQr.visibility = View.GONE
         }
+        binding.btFavorite.setOnClickListener {
+            cardViewModel.addCardToFavorite(getUserId()!!,cardId)
+        }
+    }
+
+    private fun getUserId(): String? {
+        val pref = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        return pref.getString(MainActivity.LOGIN, null)
     }
 
     private fun observeViewModel() {
@@ -86,6 +98,9 @@ class CardFragment : Fragment() {
                 tvProfession.text = it.skills
                 tvBio.text = it.bio
             }
+        }
+        cardViewModel.cardAdded.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(), "Добавлено в избранное", Toast.LENGTH_SHORT).show()
         }
     }
 

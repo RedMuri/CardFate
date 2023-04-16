@@ -90,8 +90,19 @@ class CardRepositoryImpl @Inject constructor(
             }
     }
 
+    override suspend fun addCartToFavorite(userId: String, cardId: String, callback: () -> Unit) {
+        db.collection(UsersRepositoryImpl.USERS).document(userId)
+            .collection(FAVORITE_CARDS)
+            .document(cardId)
+            .set(hashMapOf("cardId" to cardId))
+            .addOnSuccessListener {
+                callback.invoke()
+            }
+    }
+
     companion object {
 
         const val CARDS = "cards"
+        const val FAVORITE_CARDS = "favorite_cards"
     }
 }
